@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import UserItem from './UserItem';
-
 import axios from 'axios';
 
 const userStyle = {

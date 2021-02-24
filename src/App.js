@@ -18,17 +18,26 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.loading) {
-      return <Spinner />;
-    } else {
-      return (
-        <div className="App">
-          <Navbar />
-          <Users />
-        </div>
-      );
-    }
+    return this.state.loading ? (
+      <Spinner />
+    ) : (
+      <div className="App">
+        <Navbar />
+        <Users />
+      </div>
+    );
   }
 }
-
+// render() {
+//   if (this.state.loading) {
+//     return <Spinner />;
+//   } else {
+//     return (
+//       <div className="App">
+//         <Navbar />
+//         <Users />
+//       </div>
+//     );
+//   }
+// }
 export default App;
