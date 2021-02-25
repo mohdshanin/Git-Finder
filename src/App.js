@@ -35,7 +35,11 @@ const App = () => {
   return (
     <div className="App">
       <Navbar />
-      <Search searchUsers={searchUsers} />
+
+      <Search
+        searchUsers={searchUsers}
+        showClear={users.length > 0 ? true : false}
+      />
       <Users loading={loading} users={users} />
     </div>
   );
