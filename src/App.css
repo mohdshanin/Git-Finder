@@ -216,9 +216,14 @@ img {
   margin: 0;
 }
 
-.btn-block {
+.form-block {
   display: block;
   width: 100%;
+}
+.btn-block {
+  display: block;
+  width: 80%;
+  margin: auto;
 }
 
 .btn-sm {
