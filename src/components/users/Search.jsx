@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const Search = ({ searchUsers, clearUsers, showClear }) => {
+const Search = ({ searchUsers, clearUsers, showClear, Alert }) => {
   const [text, setText] = useState('');
 
   const Change = (e) => setText(e.target.value);
 
   const Add = (e) => {
-    !text ? Add('') : e.preventDefault();
-    searchUsers('');
+    text === '' ? Add('') : e.preventDefault();
+    searchUsers({});
     setText('');
   };
   const Submit = (e) => {
+    e.preventDefault();
     !text
-      ? alert('Please Add User Name Or Email For Search')
-      : e.preventDefault();
-    searchUsers({ text });
+      ? Alert('Please Enter Some Text To Search', 'dark')
+      : searchUsers({ text });
     setText(text);
   };
   // Clear Users From State
@@ -58,6 +58,7 @@ const Search = ({ searchUsers, clearUsers, showClear }) => {
 Search.prototype = {
   searchUsers: PropTypes.func.isRequired,
   clearUsers: PropTypes.func.isRequired,
+  Alert: PropTypes.func.isRequired,
   showClear: PropTypes.bool.isRequired,
 };
 
