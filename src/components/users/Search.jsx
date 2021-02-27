@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const Search = ({ searchUsers, clearUsers, showClear, Alert }) => {
@@ -6,25 +6,16 @@ const Search = ({ searchUsers, clearUsers, showClear, Alert }) => {
 
   const Change = (e) => setText(e.target.value);
 
-  const Add = (e) => {
-    text === '' ? Add('') : e.preventDefault();
-    searchUsers({});
-    setText('');
-  };
   const Submit = (e) => {
     e.preventDefault();
     !text
       ? Alert('Please Enter Some Text To Search', 'dark')
       : searchUsers({ text });
-    setText(text);
+    showClear && setText(text);
   };
-  // Clear Users From State
-  clearUsers = () => {
-    searchUsers('');
-    setText('');
-  };
+
   return (
-    <>
+    <Fragment>
       <form onSubmit={Submit} className="form  form-block">
         <input
           type="text"
@@ -41,17 +32,17 @@ const Search = ({ searchUsers, clearUsers, showClear, Alert }) => {
         />
       </form>
       {showClear && (
-        <form onSubmit={Add}>
+        <form>
           <button
-            className="btn btn-danger btn-block"
             onClick={clearUsers}
+            className="btn btn-danger btn-block"
             style={{ margin: '1rem auto' }}
           >
             Clear
           </button>
         </form>
       )}
-    </>
+    </Fragment>
   );
 };
 
