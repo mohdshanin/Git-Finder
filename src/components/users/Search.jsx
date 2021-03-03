@@ -1,7 +1,14 @@
-import React, { Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useContext } from 'react';
+import GithubContext from '../../context/github/githubContext';
+import AlertContext from '../../context/alert/alertContext';
 
-const Search = ({ searchUsers, clearUsers, showClear, Alert }) => {
+const Search = () => {
+  const githubContext = useContext(GithubContext);
+  const alertContext = useContext(AlertContext);
+
+  // const { searchUsers } = githubContext;
+  // const { setAlert } = alertContext;
+
   const [text, setText] = useState('');
 
   const Change = (e) => setText(e.target.value);
@@ -9,13 +16,13 @@ const Search = ({ searchUsers, clearUsers, showClear, Alert }) => {
   const Submit = (e) => {
     e.preventDefault();
     !text
-      ? Alert('Please Enter Some Text To Search', 'dark')
-      : searchUsers({ text });
-    showClear && setText(text);
+      ? alertContext.setAlert('Please Enter Some Text To Search', 'dark')
+      : githubContext.searchUsers({ text });
+    setText('');
   };
 
   return (
-    <Fragment>
+    <div>
       <form onSubmit={Submit} className="form  form-block">
         <input
           type="text"
@@ -31,26 +38,17 @@ const Search = ({ searchUsers, clearUsers, showClear, Alert }) => {
           className="btn btn-dark  btn-block"
         />
       </form>
-      {showClear && (
-        <form>
-          <button
-            onClick={clearUsers}
-            className="btn btn-danger btn-block"
-            style={{ margin: '1rem auto' }}
-          >
-            Clear
-          </button>
-        </form>
+      {githubContext.users.length > 0 && (
+        <button
+          onClick={githubContext.clearUsers}
+          className="btn btn-danger btn-block"
+          style={{ margin: '1rem auto' }}
+        >
+          Clear
+        </button>
       )}
-    </Fragment>
+    </div>
   );
-};
-
-Search.prototype = {
-  searchUsers: PropTypes.func.isRequired,
-  clearUsers: PropTypes.func.isRequired,
-  Alert: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired,
 };
 
 export default Search;

@@ -1,16 +1,12 @@
-import PropTypes from 'prop-types';
-
-const RepoItem = ({ repoItem }) => {
+import React from 'react';
+const RepoItem = ({ repo }) => {
   return (
     <div className="card">
       <h3>
-        <a href={repoItem.html_url}>{repoItem.name} </a>
+        <a href={repo.html_url}>{repo.name} </a>
       </h3>
     </div>
   );
 };
 
-RepoItem.propTypes = {
-  repoItem: PropTypes.object.isRequired,
-};
 export default RepoItem;
